@@ -47,14 +47,14 @@
     .cta-hotspot{
   position:absolute;
 
-  /* 尺寸：比原本小一點，但仍是主 CTA */
-  left: 18%;
+  /* 按鈕稍微再收一點，字就不會顯小 */
+  left: 20%;
   top: 80%;
-  width: 64%;
-  height: 9%;
+  width: 60%;
+  height: 8%;
 
   border-radius: 999px;
-  z-index: 5;
+  z-index: 10;
 
   display: flex;
   align-items: center;
@@ -62,40 +62,52 @@
   text-decoration:none;
   cursor: pointer;
 
-  /* 文字強化 */
-  font-size: 26px;
-  font-weight: 900;
-  letter-spacing: 2px;
+  /* 文字比例拉起來 + 更有力 */
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 950;
+  letter-spacing: 3px;
   color:#ffffff;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.45);
+  text-shadow:
+    0 2px 8px rgba(0,0,0,0.55);
 
-  /* 立體漸層（只留一組） */
+  /* 更醒目的對比漸層（上亮下深） */
   background:
-    linear-gradient(
-      180deg,
-      #b88cff 0%,
-      #8b5cf6 45%,
-      #6d28d9 100%
+    linear-gradient(180deg,
+      #f0abfc 0%,
+      #a855f7 28%,
+      #7c3aed 58%,
+      #22d3ee 110%
     );
 
-  /* 立體感關鍵 */
+  /* 亮邊 + 厚度 + 陰影，醒目與立體一次到位 */
+  border: 1px solid rgba(255,255,255,0.28);
   box-shadow:
-    0 6px 0 rgba(88,28,135,0.9),           /* 底部厚度 */
-    0 14px 28px rgba(0,0,0,0.45),          /* 外陰影 */
-    inset 0 1px 0 rgba(255,255,255,0.35), /* 上高光 */
-    inset 0 -3px 6px rgba(0,0,0,0.35);    /* 下內陰影 */
+    0 8px 0 rgba(49,46,129,0.95),          /* 厚底 */
+    0 22px 40px rgba(0,0,0,0.55),          /* 主陰影更狠 */
+    0 0 26px rgba(34,211,238,0.22),        /* 外發光（醒目） */
+    inset 0 1px 0 rgba(255,255,255,0.45),  /* 上緣高光 */
+    inset 0 -10px 18px rgba(0,0,0,0.28);   /* 下緣內陰影 */
 
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
 }
 
-/* 按下去的回饋感 */
+/* 桌機滑過：更亮、更浮 */
+.cta-hotspot:hover{
+  filter: brightness(1.08) saturate(1.05);
+  transform: translateY(-5px);
+  box-shadow:
+    0 9px 0 rgba(49,46,129,0.98),
+    0 26px 46px rgba(0,0,0,0.60),
+    0 0 34px rgba(34,211,238,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.52),
+    inset 0 -12px 20px rgba(0,0,0,0.30);
+}
+
+/* 手機按下：真的「壓下去」的爽感 */
 .cta-hotspot:active{
-  transform: translateY(1px);
-  box-shadow:
-    0 2px 0 rgba(88,28,135,0.9),
-    0 8px 18px rgba(0,0,0,0.45),
-    inset 0 2px 6px rgba(0,0,0,0.4);
-}
+  transform: translateY(2px);
+  filter: brightn
 
 
   </style>
