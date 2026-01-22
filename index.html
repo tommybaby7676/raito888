@@ -46,26 +46,57 @@
     */
     .cta-hotspot{
   position:absolute;
-  left: 12%;
-  top: 78%;
-  width: 76%;
-  height: 11%;
-  border-radius: 999px;
 
-  z-index: 5;          /* 關鍵：蓋在圖片上面 */
+  /* 尺寸：比原本小一點，但仍是主 CTA */
+  left: 18%;
+  top: 80%;
+  width: 64%;
+  height: 9%;
+
+  border-radius: 999px;
+  z-index: 5;
+
   display: flex;
   align-items: center;
   justify-content: center;
-
   text-decoration:none;
-  font-weight: 800;
-  font-size: 20px;
-  color:#fff;
-
-  background: linear-gradient(135deg, #a855f7, #7c3aed, #22d3ee);
-  box-shadow: 0 14px 30px rgba(0,0,0,0.45);
   cursor: pointer;
+
+  /* 文字強化 */
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color:#ffffff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.45);
+
+  /* 立體漸層（只留一組） */
+  background:
+    linear-gradient(
+      180deg,
+      #b88cff 0%,
+      #8b5cf6 45%,
+      #6d28d9 100%
+    );
+
+  /* 立體感關鍵 */
+  box-shadow:
+    0 6px 0 rgba(88,28,135,0.9),           /* 底部厚度 */
+    0 14px 28px rgba(0,0,0,0.45),          /* 外陰影 */
+    inset 0 1px 0 rgba(255,255,255,0.35), /* 上高光 */
+    inset 0 -3px 6px rgba(0,0,0,0.35);    /* 下內陰影 */
+
+  transform: translateY(-2px);
 }
+
+/* 按下去的回饋感 */
+.cta-hotspot:active{
+  transform: translateY(1px);
+  box-shadow:
+    0 2px 0 rgba(88,28,135,0.9),
+    0 8px 18px rgba(0,0,0,0.45),
+    inset 0 2px 6px rgba(0,0,0,0.4);
+}
+
 
   </style>
 </head>
