@@ -45,25 +45,28 @@
       你只要改 top/left/width/height 就能對齊你圖裡的按鈕位置
     */
     .cta-hotspot{
-      position:absolute;
-      /* 這些數值是示範：大概落在下方中間的按鈕區 */
-      left: 12%;
-      top: 78%;
-      width: 76%;
-      height: 11%;
-      border-radius: 999px;
-      text-indent: -9999px;
-      overflow: hidden;
+  position:absolute;
+  left: 12%;
+  top: 78%;
+  width: 76%;
+  height: 11%;
+  border-radius: 999px;
 
-      /* 預設完全透明；要方便你對位時，臨時把 opacity 調高 */
-      background: rgba(255,255,255,0.0);
-    }
+  z-index: 5;          /* 關鍵：蓋在圖片上面 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    /* 讓鍵盤使用者也能按到（可存活但不礙眼） */
-    .cta-hotspot:focus{
-      outline: 2px solid rgba(255,255,255,0.65);
-      outline-offset: 4px;
-    }
+  text-decoration:none;
+  font-weight: 800;
+  font-size: 20px;
+  color:#fff;
+
+  background: linear-gradient(135deg, #a855f7, #7c3aed, #22d3ee);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+  cursor: pointer;
+}
+
   </style>
 </head>
 
@@ -73,15 +76,13 @@
     <img src="raito888.jpg" alt="活動海報" />
 
     <!-- CTA：點擊圖內按鈕區就跳轉 -->
-    <a
-      class="cta-hotspot"
-      href="https://www.raito188.com/Register?a=2370"
-      target="_blank"
-      rel="noopener"
-      aria-label="立即遊玩"
-    >
-      立即遊玩
-    </a>
+    <a class="cta-hotspot"
+   href="https://www.raito188.com/Register?a=2370"
+   target="_blank"
+   rel="noopener">
+  立即遊玩
+</a>
+
   </main>
 </body>
 </html>
