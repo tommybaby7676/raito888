@@ -6,126 +6,181 @@
   <title>好玩遊戲</title>
 
   <style>
-    /* 讓整頁像一張 1080x1920 海報 */
     html, body{
       height:100%;
       margin:0;
-      background:#000; /* 海報外的底色 */
+      background:#000;
       overflow:hidden;
       font-family: Arial, "Noto Sans TC", sans-serif;
     }
 
-    /* 用 aspect-ratio 固定 9:16，並在任何螢幕自動縮放 */
+    /* 海報容器（9:16） */
     .poster{
       position: relative;
       width: min(100vw, calc(100vh * (9 / 16)));
-      aspect-ratio: 9 / 16; /* = 1080/1920 */
-      height: auto;
+      aspect-ratio: 9 / 16;
       margin: 0 auto;
       top: 50%;
       transform: translateY(-50%);
-      background: #111;
-      overflow: hidden;
+      background:#111;
+      overflow:hidden;
     }
 
-    /* 單圖鋪滿（你只要換這張圖檔即可） */
+    /* 背景單圖 */
     .poster img{
       position:absolute;
       inset:0;
       width:100%;
       height:100%;
-      object-fit: cover; /* 要整張不裁切就改 contain */
-      display:block;
+      object-fit: cover;
       user-select:none;
       -webkit-user-drag:none;
+      z-index:1;
     }
 
-    /*
-      CTA 熱區（視覺在圖內，但其實是透明可點區）
-      你只要改 top/left/width/height 就能對齊你圖裡的按鈕位置
-    */
+    /* CTA 按鈕 */
     .cta-hotspot{
-  position:absolute;
+      position:absolute;
+      left: 20%;
+      top: 80%;
+      width: 60%;
+      height: 8%;
 
-  /* 按鈕稍微再收一點，字就不會顯小 */
-  left: 20%;
-  top: 80%;
-  width: 60%;
-  height: 8%;
+      border-radius:999px;
+      z-index:10;
 
-  border-radius: 999px;
-  z-index: 10;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      cursor:pointer;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration:none;
-  cursor: pointer;
+      font-size: clamp(24px, 2.6vw, 32px);
+      font-weight: 950;
+      letter-spacing: 3px;
+      color:#fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.55);
 
-  /* 文字比例拉起來 + 更有力 */
-  font-size: clamp(24px, 2.6vw, 32px);
-  font-weight: 950;
-  letter-spacing: 3px;
-  color:#ffffff;
-  text-shadow:
-    0 2px 8px rgba(0,0,0,0.55);
+      background: linear-gradient(180deg,
+        #f0abfc 0%,
+        #a855f7 28%,
+        #7c3aed 58%,
+        #22d3ee 110%
+      );
 
-  /* 更醒目的對比漸層（上亮下深） */
-  background:
-    linear-gradient(180deg,
-      #f0abfc 0%,
-      #a855f7 28%,
-      #7c3aed 58%,
-      #22d3ee 110%
-    );
+      border:1px solid rgba(255,255,255,0.28);
+      box-shadow:
+        0 8px 0 rgba(49,46,129,0.95),
+        0 22px 40px rgba(0,0,0,0.55),
+        0 0 26px rgba(34,211,238,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.45),
+        inset 0 -10px 18px rgba(0,0,0,0.28);
 
-  /* 亮邊 + 厚度 + 陰影，醒目與立體一次到位 */
-  border: 1px solid rgba(255,255,255,0.28);
-  box-shadow:
-    0 8px 0 rgba(49,46,129,0.95),          /* 厚底 */
-    0 22px 40px rgba(0,0,0,0.55),          /* 主陰影更狠 */
-    0 0 26px rgba(34,211,238,0.22),        /* 外發光（醒目） */
-    inset 0 1px 0 rgba(255,255,255,0.45),  /* 上緣高光 */
-    inset 0 -10px 18px rgba(0,0,0,0.28);   /* 下緣內陰影 */
+      transform: translateY(-3px);
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
 
-  transform: translateY(-3px);
-  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
-}
+      overflow:hidden;
+      isolation:isolate;
+    }
 
-/* 桌機滑過：更亮、更浮 */
-.cta-hotspot:hover{
-  filter: brightness(1.08) saturate(1.05);
-  transform: translateY(-5px);
-  box-shadow:
-    0 9px 0 rgba(49,46,129,0.98),
-    0 26px 46px rgba(0,0,0,0.60),
-    0 0 34px rgba(34,211,238,0.28),
-    inset 0 1px 0 rgba(255,255,255,0.52),
-    inset 0 -12px 20px rgba(0,0,0,0.30);
-}
+    /* hover */
+    .cta-hotspot:hover{
+      filter: brightness(1.08) saturate(1.05);
+      transform: translateY(-5px);
+    }
 
-/* 手機按下：真的「壓下去」的爽感 */
-.cta-hotspot:active{
-  transform: translateY(2px);
-  filter: brightn
+    /* active */
+    .cta-hotspot:active{
+      transform: translateY(2px);
+      filter: brightness(0.98);
+      box-shadow:
+        0 3px 0 rgba(49,46,129,0.95),
+        0 10px 20px rgba(0,0,0,0.55),
+        0 0 18px rgba(34,211,238,0.18),
+        inset 0 3px 10px rgba(0,0,0,0.35);
+    }
 
+    /* 呼吸光 */
+    .cta-hotspot::before{
+      content:"";
+      position:absolute;
+      inset:-14%;
+      border-radius:999px;
+      background: radial-gradient(circle at 50% 50%,
+        rgba(255,255,255,0.35) 0%,
+        rgba(34,211,238,0.22) 25%,
+        rgba(168,85,247,0.18) 45%,
+        rgba(0,0,0,0) 70%
+      );
+      filter: blur(10px);
+      opacity:.25;
+      animation: ctaPulse 1.4s ease-in-out infinite;
+      pointer-events:none;
+      z-index:0;
+    }
 
+    /* 掃光 */
+    .cta-hotspot::after{
+      content:"";
+      position:absolute;
+      top:-40%;
+      left:-60%;
+      width:45%;
+      height:180%;
+      transform: rotate(20deg);
+      background: linear-gradient(90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.45) 45%,
+        rgba(255,255,255,0) 100%
+      );
+      opacity:.35;
+      animation: ctaShine 2.2s ease-in-out infinite;
+      pointer-events:none;
+      z-index:1;
+    }
+
+    @keyframes ctaPulse{
+      0%   { transform: scale(0.98); opacity:.18; }
+      50%  { transform: scale(1.05); opacity:.38; }
+      100% { transform: scale(0.98); opacity:.18; }
+    }
+
+    @keyframes ctaShine{
+      0%   { transform: translateX(-30%) rotate(20deg); opacity:0; }
+      20%  { opacity:.35; }
+      55%  { opacity:.35; }
+      70%  { opacity:0; }
+      100% { transform: translateX(220%) rotate(20deg); opacity:0; }
+    }
+
+    .cta-hotspot:hover::before,
+    .cta-hotspot:hover::after,
+    .cta-hotspot:active::before,
+    .cta-hotspot:active::after{
+      animation-play-state: paused;
+    }
+
+    /* 底部版權文字 */
+    .footer{
+      position:absolute;
+      bottom:2%;
+      width:100%;
+      text-align:center;
+      font-size:12px;
+      color:rgba(255,255,255,0.65);
+      z-index:5;
+      letter-spacing:1px;
+    }
   </style>
 </head>
 
 <body>
-  <main class="poster" aria-label="活動海報">
-    <!-- 只換這張圖：建議放 1080x1920 的檔案 -->
-    <img src="raito888.jpg" alt="活動海報" />
+  <main class="poster">
+    <img src="raito888.jpg" alt="活動海報">
 
-    <!-- CTA：點擊圖內按鈕區就跳轉 -->
     <a class="cta-hotspot"
-   href="https://www.raito188.com/Register?a=2370"
-   target="_blank"
-   rel="noopener">
-  立即遊玩
-</a>
-
-  </main>
-</body>
-</html>
+       href="https://www.raito188.com/Register?a=2370"
+       target="_blank"
+       rel="noopener">
+      立即遊玩
+    </a>
